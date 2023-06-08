@@ -2,6 +2,15 @@ name: "Deploy Helm to AKS"
 description: "Deploys a helm chart to AKS"
 
 inputs:
+  azure_client_id:
+    description: "azure_client_id"
+    required: true
+  azure_subscription_id:
+    description: "azure_subscription_id"
+    required: true
+  azure_tenant_id:
+    description: "azure_tenant_id"
+    required: true
   cluster_name:
     description: "Name of AKS cluster"
     required: true
@@ -26,9 +35,9 @@ runs:
   steps:
   - uses: azure/login@v1
     with:
-      client-id: ${{ secrets.AZURE_CLIENT_ID }}
-      subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+      client-id: ${{ inputs.azure_client_id }}
+      subscription-id: ${{ inputs.azure_subscription_id }}
+      tenant-id: ${{ inputs.azure_tenant_id }}
 
   - uses: azure/aks-set-context@v3
     name: Set AKS context
