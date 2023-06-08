@@ -39,18 +39,18 @@ runs:
       subscription-id: ${{ inputs.azure_subscription_id }}
       tenant-id: ${{ inputs.azure_tenant_id }}
 
-- uses: azure/use-kubelogin@v1
-  name: Set up kubelogin for non-interactive login
-  with:
-    kubelogin-version: v0.0.25
+  - uses: azure/use-kubelogin@v1
+    name: Set up kubelogin for non-interactive login
+    with:
+      kubelogin-version: v0.0.25
 
-- uses: azure/aks-set-context@v3
-  name: Get K8s context
-  with:
-    admin: "false"
-    cluster-name: ${{ inputs.cluster_name }}
-    resource-group: ${{ inputs.resource_group }}
-    use-kubelogin: "true"
+  - uses: azure/aks-set-context@v3
+    name: Get K8s context
+    with:
+      admin: "false"
+      cluster-name: ${{ inputs.cluster_name }}
+      resource-group: ${{ inputs.resource_group }}
+      use-kubelogin: "true"
   
   - name: Set branch name as env variable
     shell: bash
